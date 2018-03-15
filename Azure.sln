@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0C7019A2-8F2E-486E-9A17-886706AD33CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D6BEC558-F433-4EC8-8415-6F893F94D62D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Azure.Storage", "src\ThoughtHaven.Azure.Storage\ThoughtHaven.Azure.Storage.csproj", "{5786AD4D-C488-42C5-9935-1101C5451371}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Azure.Storage.Test", "test\ThoughtHaven.Azure.Storage.Test\ThoughtHaven.Azure.Storage.Test.csproj", "{556B898B-7DD5-46E8-A4FB-35F57AE5D453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.Azure.Storage", "src\ThoughtHaven.Data.Azure.Storage\ThoughtHaven.Data.Azure.Storage.csproj", "{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.Azure.Storage.Test", "test\ThoughtHaven.Data.Azure.Storage.Test\ThoughtHaven.Data.Azure.Storage.Test.csproj", "{1B810194-9521-4EDB-9DFE-41CA09957608}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5786AD4D-C488-42C5-9935-1101C5451371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5786AD4D-C488-42C5-9935-1101C5451371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5786AD4D-C488-42C5-9935-1101C5451371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5786AD4D-C488-42C5-9935-1101C5451371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B810194-9521-4EDB-9DFE-41CA09957608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B810194-9521-4EDB-9DFE-41CA09957608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B810194-9521-4EDB-9DFE-41CA09957608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B810194-9521-4EDB-9DFE-41CA09957608}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5786AD4D-C488-42C5-9935-1101C5451371} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
+		{556B898B-7DD5-46E8-A4FB-35F57AE5D453} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
+		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
+		{1B810194-9521-4EDB-9DFE-41CA09957608} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CB6E9F6-3A2C-4CA5-9843-738ACCB1D1DA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.100.0</Version>
+    <Authors>Thought Haven</Authors>
+    <Product>Thought Haven Azure Storage</Product>
+    <Description>Convenient helpers and wrappers for the Microsoft Azure storage library.</Description>
+    <Copyright>© Thought Haven. All rights reserved.</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ThoughtHaven.Guards" Version="0.100.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.1.0" />
+  </ItemGroup>
+
+</Project>
