@@ -7,13 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0C7019A2-8F2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D6BEC558-F433-4EC8-8415-6F893F94D62D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Azure.Storage", "src\ThoughtHaven.Azure.Storage\ThoughtHaven.Azure.Storage.csproj", "{5786AD4D-C488-42C5-9935-1101C5451371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThoughtHaven.Azure.Storage", "src\ThoughtHaven.Azure.Storage\ThoughtHaven.Azure.Storage.csproj", "{5786AD4D-C488-42C5-9935-1101C5451371}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Azure.Storage.Test", "test\ThoughtHaven.Azure.Storage.Test\ThoughtHaven.Azure.Storage.Test.csproj", "{556B898B-7DD5-46E8-A4FB-35F57AE5D453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThoughtHaven.Azure.Storage.Test", "test\ThoughtHaven.Azure.Storage.Test\ThoughtHaven.Azure.Storage.Test.csproj", "{556B898B-7DD5-46E8-A4FB-35F57AE5D453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.Azure.Storage", "src\ThoughtHaven.Data.Azure.Storage\ThoughtHaven.Data.Azure.Storage.csproj", "{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.AzureTableStorage", "src\ThoughtHaven.Data.AzureTableStorage\ThoughtHaven.Data.AzureTableStorage.csproj", "{1B05BA0B-64E1-4491-A422-05B65131FE32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.Azure.Storage.Test", "test\ThoughtHaven.Data.Azure.Storage.Test\ThoughtHaven.Data.Azure.Storage.Test.csproj", "{1B810194-9521-4EDB-9DFE-41CA09957608}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.AzureTableStorage.Test", "test\ThoughtHaven.Data.AzureTableStorage.Test\ThoughtHaven.Data.AzureTableStorage.Test.csproj", "{56C519E1-8374-44A3-8FA8-DE5B33A77768}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +29,14 @@ Global
 		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B810194-9521-4EDB-9DFE-41CA09957608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B810194-9521-4EDB-9DFE-41CA09957608}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B810194-9521-4EDB-9DFE-41CA09957608}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B810194-9521-4EDB-9DFE-41CA09957608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,8 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5786AD4D-C488-42C5-9935-1101C5451371} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
 		{556B898B-7DD5-46E8-A4FB-35F57AE5D453} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
-		{B63C4D22-0505-4AB6-85DB-CFEF43513DB1} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
-		{1B810194-9521-4EDB-9DFE-41CA09957608} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
+		{1B05BA0B-64E1-4491-A422-05B65131FE32} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
+		{56C519E1-8374-44A3-8FA8-DE5B33A77768} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CB6E9F6-3A2C-4CA5-9843-738ACCB1D1DA}
