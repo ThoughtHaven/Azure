@@ -17,12 +17,12 @@ namespace ThoughtHaven.Data.Fakes
         public string Retrieve_InputRowKey;
         public DynamicTableEntity Retrieve_Output = new DynamicTableEntity()
         { PartitionKey = "pk", RowKey = "rk" };
-        public override Task<DynamicTableEntity> Retrieve(string partitionKey, string rowKey)
+        public override Task<TEntity> Retrieve<TEntity>(string partitionKey, string rowKey)
         {
             this.Retrieve_InputPartitionKey = partitionKey;
             this.Retrieve_InputRowKey = rowKey;
 
-            return Task.FromResult(this.Retrieve_Output);
+            return Task.FromResult(this.Retrieve_Output as TEntity);
         }
 
         public ITableEntity Insert_InputEntity;

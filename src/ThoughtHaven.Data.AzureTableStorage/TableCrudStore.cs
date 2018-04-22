@@ -29,8 +29,8 @@ namespace ThoughtHaven.Data
 
             var keys = this.DataKeyToEntityKeys(key);
 
-            var entity = await this.EntityStore.Retrieve(keys.PartitionKey, keys.RowKey)
-                .ConfigureAwait(false);
+            var entity = await this.EntityStore.Retrieve<DynamicTableEntity>(
+                keys.PartitionKey, keys.RowKey).ConfigureAwait(false);
 
             if (entity == null) { return null; }
 

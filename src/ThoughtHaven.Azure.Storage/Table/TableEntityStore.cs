@@ -22,10 +22,7 @@ namespace ThoughtHaven.Azure.Storage.Table
             this.Table = table ?? throw new ArgumentNullException(nameof(table));
             this.Options = options ?? throw new ArgumentNullException(nameof(options));
         }
-
-        public virtual Task<DynamicTableEntity> Retrieve(string partitionKey,
-            string rowKey) => this.Retrieve<DynamicTableEntity>(partitionKey, rowKey);
-
+        
         public virtual async Task<TEntity> Retrieve<TEntity>(string partitionKey, string rowKey)
             where TEntity : class, ITableEntity, new()
         {

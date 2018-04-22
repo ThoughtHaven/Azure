@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.101.0</Version>
+    <Version>0.102.0</Version>
     <Authors>Thought Haven, Brendan Ridenour</Authors>
     <Product>Thought Haven Azure Storage</Product>
     <Description>Convenient helpers and wrappers for the Microsoft Azure storage library.</Description>
