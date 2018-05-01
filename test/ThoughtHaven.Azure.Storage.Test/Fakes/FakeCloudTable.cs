@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -9,7 +11,58 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
     public class FakeCloudTable : CloudTable
     {
         public FakeCloudTable(string tableName) :
-            base(tableAddress: new Uri($"https://example.com/{tableName}")) { }
+            base(tableAddress: new Uri($"https://example.com/{tableName}"))
+        { }
+
+        public TableQuery<DynamicTableEntity> ExecuteQuerySegmentedAsync_InputQuery;
+        public TableContinuationToken ExecuteQuerySegmentedAsync_InputToken;
+        public TableRequestOptions ExecuteQuerySegmentedAsync_InputRequestOptions;
+        public OperationContext ExecuteQuerySegmentedAsync_InputOperationContext;
+        private bool ExecuteQuerySegmentedAsync_OutputTokenSet = false;
+        public TableContinuationToken ExecuteQuerySegmentedAsync_OutputToken = null;
+        public List<DynamicTableEntity> ExecuteQuerySegmentedAsync_OutputEntities = new List<DynamicTableEntity>();
+        public List<DynamicTableEntity> ExecuteQuerySegmentedAsync_OutputContinuationEntities;
+        public TableQuerySegment<DynamicTableEntity> ExecuteQuerySegmentedAsync_Output
+        {
+            get
+            {
+                var ctor = typeof(TableQuerySegment<DynamicTableEntity>)
+                    .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
+                    .FirstOrDefault(c => c.GetParameters().Count() == 1);
+
+                var entities = !this.ExecuteQuerySegmentedAsync_OutputTokenSet
+                    ? this.ExecuteQuerySegmentedAsync_OutputEntities
+                    : this.ExecuteQuerySegmentedAsync_OutputContinuationEntities;
+
+                var segment = ctor.Invoke(new object[] { entities })
+                    as TableQuerySegment<DynamicTableEntity>;
+
+                if (this.ExecuteQuerySegmentedAsync_OutputToken != null &&
+                    !this.ExecuteQuerySegmentedAsync_OutputTokenSet)
+                {
+                    var token = segment.GetType().GetField("continuationToken",
+                        BindingFlags.Instance | BindingFlags.NonPublic);
+
+                    token.SetValue(segment, this.ExecuteQuerySegmentedAsync_OutputToken);
+
+                    this.ExecuteQuerySegmentedAsync_OutputTokenSet = true;
+                }
+
+                return segment;
+            }
+        }
+        public override Task<TableQuerySegment<T>> ExecuteQuerySegmentedAsync<T>(
+            TableQuery<T> query, TableContinuationToken token,
+            TableRequestOptions requestOptions, OperationContext operationContext)
+        {
+            this.ExecuteQuerySegmentedAsync_InputQuery = query as TableQuery<DynamicTableEntity>;
+            this.ExecuteQuerySegmentedAsync_InputToken = token;
+            this.ExecuteQuerySegmentedAsync_InputRequestOptions = requestOptions;
+            this.ExecuteQuerySegmentedAsync_InputOperationContext = operationContext;
+
+            return Task.FromResult(
+                this.ExecuteQuerySegmentedAsync_Output as TableQuerySegment<T>);
+        }
 
         public TableRequestOptions CreateAsync_InputRequestOptions;
         public OperationContext CreateAsync_InputOperationContext;

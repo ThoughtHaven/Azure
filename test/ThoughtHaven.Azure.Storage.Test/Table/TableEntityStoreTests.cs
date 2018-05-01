@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
 using ThoughtHaven.Azure.Storage.Table;
@@ -144,11 +146,256 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 }
             }
         }
-
+        
         public class RetrieveMethod
         {
             public class TEntityGeneric
             {
+                public class PartitionKeyAndTakeOverload
+                {
+                    [Fact]
+                    public async Task EmptyPartitionKey_Throws()
+                    {
+                        await Assert.ThrowsAsync<ArgumentException>("partitionKey", async () =>
+                        {
+                            await Store().Retrieve<DynamicTableEntity>(
+                                partitionKey: "");
+                        });
+                    }
+
+                    [Fact]
+                    public async Task WhiteSpacePartitionKey_Throws()
+                    {
+                        await Assert.ThrowsAsync<ArgumentException>("partitionKey", async () =>
+                        {
+                            await Store().Retrieve<DynamicTableEntity>(
+                                partitionKey: " ");
+                        });
+                    }
+
+                    [Fact]
+                    public async Task TakeLessThan2_Throws()
+                    {
+                        await Assert.ThrowsAsync<ArgumentOutOfRangeException>("take", async () =>
+                        {
+                            await Store().Retrieve<DynamicTableEntity>(take: 1);
+                        });
+                    }
+
+                    [Fact]
+                    public async Task WhenCalled_CallsEnsureExistsOnExistenceTester()
+                    {
+                        var table = Table();
+                        var tester = Tester();
+                        var options = Options();
+
+                        await Store(table, tester, options).Retrieve<DynamicTableEntity>(
+                            partitionKey: "pk");
+
+                        Assert.Equal(table, tester.EnsureExists_InputTable);
+                    }
+
+                    [Fact]
+                    public async Task NullPartitionKey_CallsExecuteQuerySegmentedOnTable()
+                    {
+                        var table = Table();
+                        var tester = Tester();
+                        var options = Options();
+
+                        await Store(table, tester, options).Retrieve<DynamicTableEntity>(
+                            partitionKey: null);
+                        
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery
+                            .FilterString);
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
+                        Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
+                        Assert.Equal(options,
+                            table.ExecuteQuerySegmentedAsync_InputRequestOptions);
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputOperationContext);
+                    }
+
+                    [Fact]
+                    public async Task WithPartitionKey_CallsExecuteQuerySegmentedOnTable()
+                    {
+                        var table = Table();
+                        var tester = Tester();
+                        var options = Options();
+
+                        await Store(table, tester, options).Retrieve<DynamicTableEntity>(
+                            partitionKey: "pk");
+
+                        Assert.Equal("PartitionKey eq 'pk'",
+                            table.ExecuteQuerySegmentedAsync_InputQuery.FilterString);
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
+                        Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
+                        Assert.Equal(options,
+                            table.ExecuteQuerySegmentedAsync_InputRequestOptions);
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputOperationContext);
+                    }
+
+                    [Fact]
+                    public async Task WithTake_CallsExecuteQuerySegmentedOnTable()
+                    {
+                        var table = Table();
+                        var tester = Tester();
+                        var options = Options();
+
+                        await Store(table, tester, options).Retrieve<DynamicTableEntity>(
+                            take: 2);
+
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery
+                            .FilterString);
+                        Assert.Equal(2, 
+                            table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
+                        Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
+                        Assert.Equal(options,
+                            table.ExecuteQuerySegmentedAsync_InputRequestOptions);
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputOperationContext);
+                    }
+
+                    [Fact]
+                    public async Task WithPartitionKeyAndTake_CallsExecuteQuerySegmentedOnTable()
+                    {
+                        var table = Table();
+                        var tester = Tester();
+                        var options = Options();
+
+                        await Store(table, tester, options).Retrieve<DynamicTableEntity>(
+                            partitionKey: "pk", take: 2);
+
+                        Assert.Equal("PartitionKey eq 'pk'",
+                            table.ExecuteQuerySegmentedAsync_InputQuery.FilterString);
+                        Assert.Equal(2,
+                            table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
+                        Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
+                        Assert.Equal(options,
+                            table.ExecuteQuerySegmentedAsync_InputRequestOptions);
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputOperationContext);
+                    }
+
+                    [Fact]
+                    public async Task ExecuteQuerySegmentedOnTableReturnsEntites_ReturnsEntites()
+                    {
+                        var table = Table();
+                        table.ExecuteQuerySegmentedAsync_OutputEntities = new List<DynamicTableEntity>()
+                        {
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                        };
+                        var tester = Tester();
+                        var options = Options();
+
+                        var entities = await Store(table, tester, options)
+                            .Retrieve<DynamicTableEntity>();
+
+                        Assert.Equal(3, entities.Count());
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[0],
+                            entities.ElementAt(0));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[1],
+                            entities.ElementAt(1));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[2],
+                            entities.ElementAt(2));
+                    }
+
+                    [Fact]
+                    public async Task ExecuteQuerySegmentedOnTableReturnsMoreThanTake_ReturnsTake()
+                    {
+                        var table = Table();
+                        table.ExecuteQuerySegmentedAsync_OutputEntities = new List<DynamicTableEntity>()
+                        {
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                        };
+                        var tester = Tester();
+                        var options = Options();
+
+                        var entities = await Store(table, tester, options)
+                            .Retrieve<DynamicTableEntity>(take: 2);
+
+                        Assert.Equal(2, entities.Count());
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[0],
+                            entities.ElementAt(0));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[1],
+                            entities.ElementAt(1));
+                    }
+
+                    [Fact]
+                    public async Task ExecuteQuerySegmentedOnTableReturnsContinuationToken_ReturnsAllEntites()
+                    {
+                        var table = Table();
+                        table.ExecuteQuerySegmentedAsync_OutputEntities = new List<DynamicTableEntity>()
+                        {
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                        };
+                        table.ExecuteQuerySegmentedAsync_OutputToken = new TableContinuationToken();
+                        table.ExecuteQuerySegmentedAsync_OutputContinuationEntities = new List<DynamicTableEntity>()
+                        {
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                        };
+                        var tester = Tester();
+                        var options = Options();
+
+                        var entities = await Store(table, tester, options)
+                            .Retrieve<DynamicTableEntity>();
+
+                        Assert.Equal(6, entities.Count());
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[0],
+                            entities.ElementAt(0));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[1],
+                            entities.ElementAt(1));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[2],
+                            entities.ElementAt(2));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputContinuationEntities[0],
+                            entities.ElementAt(3));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputContinuationEntities[1],
+                            entities.ElementAt(4));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputContinuationEntities[2],
+                            entities.ElementAt(5));
+                    }
+
+                    [Fact]
+                    public async Task ExecuteQuerySegmentedOnTableReturnsContinuationTokenAndMoreThanTake_ReturnsTake()
+                    {
+                        var table = Table();
+                        table.ExecuteQuerySegmentedAsync_OutputEntities = new List<DynamicTableEntity>()
+                        {
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                        };
+                        table.ExecuteQuerySegmentedAsync_OutputToken = new TableContinuationToken();
+                        table.ExecuteQuerySegmentedAsync_OutputContinuationEntities = new List<DynamicTableEntity>()
+                        {
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                            new DynamicTableEntity(),
+                        };
+                        var tester = Tester();
+                        var options = Options();
+
+                        var entities = await Store(table, tester, options)
+                            .Retrieve<DynamicTableEntity>(take: 5);
+
+                        Assert.Equal(5, entities.Count());
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[0],
+                            entities.ElementAt(0));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[1],
+                            entities.ElementAt(1));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputEntities[2],
+                            entities.ElementAt(2));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputContinuationEntities[0],
+                            entities.ElementAt(3));
+                        Assert.Equal(table.ExecuteQuerySegmentedAsync_OutputContinuationEntities[1],
+                            entities.ElementAt(4));
+                    }
+                }
+
                 public class PartitionKeyAndRowKeyOverload
                 {
                     [Fact]

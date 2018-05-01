@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace ThoughtHaven.Azure.Storage.Table
 {
@@ -22,7 +23,64 @@ namespace ThoughtHaven.Azure.Storage.Table
             this.Table = table ?? throw new ArgumentNullException(nameof(table));
             this.Options = options ?? throw new ArgumentNullException(nameof(options));
         }
-        
+
+        public virtual async Task<IEnumerable<TEntity>> Retrieve<TEntity>(
+            string partitionKey = null, int? take = null)
+            where TEntity : ITableEntity, new()
+        {
+            if (partitionKey != null)
+            { Guard.NullOrWhiteSpace(nameof(partitionKey), partitionKey); }
+
+            if (take.HasValue) { Guard.LessThan(nameof(take), take.Value, minimum: 2); }
+
+            await this.ExistenceTester.EnsureExists(this.Table).ConfigureAwait(false);
+
+            var query = new TableQuery<TEntity>();
+            
+            if (!string.IsNullOrWhiteSpace(partitionKey))
+            {
+                query.Where(TableQuery.GenerateFilterCondition(
+                    propertyName: nameof(ITableEntity.PartitionKey),
+                    operation: QueryComparisons.Equal,
+                    givenValue: partitionKey));
+            }
+
+            query.Take(take);
+
+            var results = new List<TEntity>();
+
+            var token = new TableContinuationToken();
+            while (token != null)
+            {
+                var segment = await this.Table.ExecuteQuerySegmentedAsync(query, token,
+                    this.Options, operationContext: null).ConfigureAwait(false);
+
+                results.AddRange(segment?.Results ?? (IEnumerable<TEntity>)new TEntity[0]);
+
+                if (take.HasValue && results.Count >= take)
+                {
+                    if (results.Count != take)
+                    {
+                        var removeCount = results.Count - take.Value;
+
+                        results.RemoveRange(index: results.Count - removeCount,
+                            count: removeCount);
+                    }
+
+                    break;
+                }
+
+                if (take.HasValue && results.Count != take.Value)
+                {
+                    query.TakeCount = query.TakeCount.Value - results.Count;
+                }
+
+                token = segment.ContinuationToken;
+            }
+
+            return results;
+        }
+
         public virtual async Task<TEntity> Retrieve<TEntity>(string partitionKey, string rowKey)
             where TEntity : class, ITableEntity, new()
         {
