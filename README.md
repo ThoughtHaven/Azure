@@ -1,4 +1,4 @@
-Thought Haven Core
+Thought Haven Azure
 ===
 
 Data abstractions and helpers around the official Microsoft Azure library so that cloud storage development feels more like working with POCOs, not TableEntities, etc.
