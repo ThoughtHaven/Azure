@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <RootNamespace>ThoughtHaven.Data</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.105.1</Version>
+    <Version>0.105.2</Version>
     <Authors>Thought Haven, Brendan Ridenour</Authors>
     <Company>Thought Haven</Company>
     <Product>Thought Haven Data Azure Table Storage</Product>
