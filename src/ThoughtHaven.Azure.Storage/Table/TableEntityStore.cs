@@ -25,7 +25,7 @@ namespace ThoughtHaven.Azure.Storage.Table
         }
 
         public virtual async Task<IEnumerable<TEntity>> Retrieve<TEntity>(
-            string partitionKey = null, int? take = null)
+            string? partitionKey = null, int? take = null)
             where TEntity : ITableEntity, new()
         {
             if (partitionKey != null)
@@ -72,16 +72,16 @@ namespace ThoughtHaven.Azure.Storage.Table
 
                 if (take.HasValue && results.Count != take.Value)
                 {
-                    query.TakeCount = query.TakeCount.Value - results.Count;
+                    query.TakeCount = query.TakeCount!.Value - results.Count;
                 }
 
-                token = segment.ContinuationToken;
+                token = segment!.ContinuationToken;
             }
 
             return results;
         }
 
-        public virtual async Task<TEntity> Retrieve<TEntity>(string partitionKey, string rowKey)
+        public virtual async Task<TEntity?> Retrieve<TEntity>(string partitionKey, string rowKey)
             where TEntity : class, ITableEntity, new()
         {
             Guard.NullOrWhiteSpace(nameof(partitionKey), partitionKey);
@@ -119,7 +119,7 @@ namespace ThoughtHaven.Azure.Storage.Table
 
             await this.ExistenceTester.EnsureExists(this.Table).ConfigureAwait(false);
 
-            TableOperation insert = TableOperation.Insert(entity);
+            var insert = TableOperation.Insert(entity);
 
             var result = await this.Table.ExecuteAsync(insert, this.Options,
                 operationContext: null).ConfigureAwait(false);

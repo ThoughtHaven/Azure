@@ -15,7 +15,7 @@ namespace ThoughtHaven.Data
                     Assert.Throws<ArgumentNullException>("partitionKey", () =>
                     {
                         new TableEntityKeys(
-                            partitionKey: null,
+                            partitionKey: null!,
                             rowKey: "rk");
                     });
                 }
@@ -49,7 +49,7 @@ namespace ThoughtHaven.Data
                     {
                         new TableEntityKeys(
                             partitionKey: "pk",
-                            rowKey: null);
+                            rowKey: null!);
                     });
                 }
 

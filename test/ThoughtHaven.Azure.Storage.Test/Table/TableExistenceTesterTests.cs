@@ -16,7 +16,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     Assert.Throws<ArgumentNullException>("table", () =>
                     {
-                        Tester().GetStorageUri(table: null);
+                        Tester().GetStorageUri(table: null!);
                     });
                 }
 
@@ -41,7 +41,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("table", async () =>
                     {
-                        await Tester().CreateIfNotExists(table: null);
+                        await Tester().CreateIfNotExists(table: null!);
                     });
                 }
 

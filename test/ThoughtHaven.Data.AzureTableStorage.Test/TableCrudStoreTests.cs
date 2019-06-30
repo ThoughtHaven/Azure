@@ -20,7 +20,7 @@ namespace ThoughtHaven.Data
                     Assert.Throws<ArgumentNullException>("entityStore", () =>
                     {
                         new TableCrudStore<int?, object>(
-                            entityStore: null,
+                            entityStore: null!,
                             dataKeyToEntityKeys: DataKeyToEntityKeys(),
                             dataToEntityKeys: DataToEntityKeys());
                     });
@@ -33,7 +33,7 @@ namespace ThoughtHaven.Data
                     {
                         new TableCrudStore<int?, object>(
                             entityStore: EntityStore(),
-                            dataKeyToEntityKeys: null,
+                            dataKeyToEntityKeys: null!,
                             dataToEntityKeys: DataToEntityKeys());
                     });
                 }
@@ -46,7 +46,7 @@ namespace ThoughtHaven.Data
                         new TableCrudStore<int?, object>(
                             entityStore: EntityStore(),
                             dataKeyToEntityKeys: DataKeyToEntityKeys(),
-                            dataToEntityKeys: null);
+                            dataToEntityKeys: null!);
                     });
                 }
             }
@@ -91,12 +91,12 @@ namespace ThoughtHaven.Data
                 public async Task WhenCalled_ReturnData()
                 {
                     var store = EntityStore();
-                    store.Retrieve_Output.Properties.Add(nameof(DataModel.Id),
+                    store.Retrieve_Output!.Properties.Add(nameof(DataModel.Id),
                         EntityProperty.GeneratePropertyForString("id"));
 
                     var result = await CrudStore(store).Retrieve(key: 1);
 
-                    Assert.Equal("id", result.Id);
+                    Assert.Equal("id", result!.Id);
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace ThoughtHaven.Data
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("data", async () =>
                     {
-                        await CrudStore().Create(data: null);
+                        await CrudStore().Create(data: null!);
                     });
                 }
 
@@ -122,7 +122,7 @@ namespace ThoughtHaven.Data
 
                     await CrudStore(entityStore).Create(data);
 
-                    Assert.Equal("pk", entityStore.Insert_InputEntity.PartitionKey);
+                    Assert.Equal("pk", entityStore.Insert_InputEntity!.PartitionKey);
                     Assert.Equal("rk", entityStore.Insert_InputEntity.RowKey);
                     Assert.Equal("*", entityStore.Insert_InputEntity.ETag);
                     Assert.Equal(data.Id,
@@ -151,7 +151,7 @@ namespace ThoughtHaven.Data
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("data", async () =>
                     {
-                        await CrudStore().Update(data: null);
+                        await CrudStore().Update(data: null!);
                     });
                 }
 
@@ -163,7 +163,7 @@ namespace ThoughtHaven.Data
 
                     await CrudStore(entityStore).Update(data);
 
-                    Assert.Equal("pk", entityStore.Replace_InputEntity.PartitionKey);
+                    Assert.Equal("pk", entityStore.Replace_InputEntity!.PartitionKey);
                     Assert.Equal("rk", entityStore.Replace_InputEntity.RowKey);
                     Assert.Equal("*", entityStore.Replace_InputEntity.ETag);
                     Assert.Equal(data.Id,
@@ -203,7 +203,7 @@ namespace ThoughtHaven.Data
 
                     await CrudStore(entityStore).Delete(key: 1);
 
-                    Assert.Equal("pk", entityStore.Delete_InputEntity.PartitionKey);
+                    Assert.Equal("pk", entityStore.Delete_InputEntity!.PartitionKey);
                     Assert.Equal("rk", entityStore.Delete_InputEntity.RowKey);
                     Assert.Equal("*", entityStore.Delete_InputEntity.ETag);
                 }
@@ -237,9 +237,9 @@ namespace ThoughtHaven.Data
         private static Func<object, TableEntityKeys> DataToEntityKeys() =>
             data => new TableEntityKeys("pk", "rk");
         private static TableCrudStore<int?, DataModel> CrudStore(
-            FakeTableEntityStore entityStore = null,
-            Func<int?, TableEntityKeys> dataKeyToEntityKeys = null,
-            Func<object, TableEntityKeys> dataToEntityKeys = null) =>
+            FakeTableEntityStore? entityStore = null,
+            Func<int?, TableEntityKeys>? dataKeyToEntityKeys = null,
+            Func<object, TableEntityKeys>? dataToEntityKeys = null) =>
             new TableCrudStore<int?, DataModel>(entityStore ?? EntityStore(),
                 dataKeyToEntityKeys ?? DataKeyToEntityKeys(),
                 dataToEntityKeys ?? DataToEntityKeys());
@@ -249,7 +249,7 @@ namespace ThoughtHaven.Data
                 "message", new Exception());
         private class DataModel
         {
-            public string Id { get; set; }
+            public string? Id { get; set; }
         }
     }
 }

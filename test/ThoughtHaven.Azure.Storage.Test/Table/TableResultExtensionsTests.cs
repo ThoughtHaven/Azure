@@ -15,7 +15,7 @@ namespace ThoughtHaven.Azure.Storage.Table
                 {
                     Assert.Throws<ArgumentNullException>("result", () =>
                     {
-                        ((TableResult)null).IsSuccessStatusCode();
+                        ((TableResult)null!).IsSuccessStatusCode();
                     });
                 }
 
@@ -62,7 +62,7 @@ namespace ThoughtHaven.Azure.Storage.Table
                 {
                     Assert.Throws<ArgumentNullException>("result", () =>
                     {
-                        ((TableResult)null).EnsureSuccessStatusCode();
+                        ((TableResult)null!).EnsureSuccessStatusCode();
                     });
                 }
 

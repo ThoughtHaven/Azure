@@ -16,7 +16,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             this.Options = options;
         }
 
-        public CloudTable EnsureExists_InputTable;
+        public CloudTable? EnsureExists_InputTable;
         public override Task EnsureExists(CloudTable table)
         {
             this.EnsureExists_InputTable = table;
@@ -24,8 +24,8 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return base.EnsureExists(table);
         }
 
-        public CloudTable GetStorageUri_InputTable;
-        public StorageUri GetStorageUri_Output;
+        public CloudTable? GetStorageUri_InputTable;
+        public StorageUri? GetStorageUri_Output = null;
         new public StorageUri GetStorageUri(CloudTable table)
         {
             this.GetStorageUri_InputTable = table;
@@ -34,7 +34,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return this.GetStorageUri_Output;
         }
 
-        public CloudTable CreateIfNotExists_InputTable;
+        public CloudTable? CreateIfNotExists_InputTable;
         new public Task CreateIfNotExists(CloudTable table)
         {
             this.CreateIfNotExists_InputTable = table;

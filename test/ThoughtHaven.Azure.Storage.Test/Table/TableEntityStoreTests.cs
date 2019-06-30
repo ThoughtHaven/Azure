@@ -21,7 +21,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     Assert.Throws<ArgumentNullException>("table", () =>
                     {
                         new TableEntityStore(
-                            table: null,
+                            table: null!,
                             options: Options());
                     });
                 }
@@ -33,7 +33,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     {
                         new TableEntityStore(
                             table: Table(),
-                            options: null);
+                            options: null!);
                     });
                 }
 
@@ -79,7 +79,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     Assert.Throws<ArgumentNullException>("table", () =>
                     {
                         new TableEntityStore(
-                            table: null,
+                            table: null!,
                             existenceTester: Tester(),
                             options: Options());
                     });
@@ -92,7 +92,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     {
                         new TableEntityStore(
                             table: Table(),
-                            existenceTester: null,
+                            existenceTester: null!,
                             options: Options());
                     });
                 }
@@ -105,7 +105,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                         new TableEntityStore(
                             table: Table(),
                             existenceTester: Tester(),
-                            options: null);
+                            options: null!);
                     });
                 }
 
@@ -205,7 +205,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                         await Store(table, tester, options).Retrieve<DynamicTableEntity>(
                             partitionKey: null);
                         
-                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery!
                             .FilterString);
                         Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
                         Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
@@ -225,7 +225,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                             partitionKey: "pk");
 
                         Assert.Equal("PartitionKey eq 'pk'",
-                            table.ExecuteQuerySegmentedAsync_InputQuery.FilterString);
+                            table.ExecuteQuerySegmentedAsync_InputQuery!.FilterString);
                         Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
                         Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
                         Assert.Equal(options,
@@ -243,7 +243,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                         await Store(table, tester, options).Retrieve<DynamicTableEntity>(
                             take: 2);
 
-                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery
+                        Assert.Null(table.ExecuteQuerySegmentedAsync_InputQuery!
                             .FilterString);
                         Assert.Equal(2, 
                             table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
@@ -264,7 +264,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                             partitionKey: "pk", take: 2);
 
                         Assert.Equal("PartitionKey eq 'pk'",
-                            table.ExecuteQuerySegmentedAsync_InputQuery.FilterString);
+                            table.ExecuteQuerySegmentedAsync_InputQuery!.FilterString);
                         Assert.Equal(2,
                             table.ExecuteQuerySegmentedAsync_InputQuery.TakeCount);
                         Assert.NotNull(table.ExecuteQuerySegmentedAsync_InputToken);
@@ -404,7 +404,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                         await Assert.ThrowsAsync<ArgumentNullException>("partitionKey", async () =>
                         {
                             await Store().Retrieve<DynamicTableEntity>(
-                                partitionKey: null,
+                                partitionKey: null!,
                                 rowKey: "rk");
                         });
                     }
@@ -438,7 +438,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                         {
                             await Store().Retrieve<DynamicTableEntity>(
                                 partitionKey: "pk",
-                                rowKey: null);
+                                rowKey: null!);
                         });
                     }
 
@@ -488,7 +488,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                             "pk", "rk");
 
                         Assert.Equal(TableOperationType.Retrieve,
-                            table.ExecuteAsync_InputOperation.OperationType);
+                            table.ExecuteAsync_InputOperation!.OperationType);
                         Assert.Equal(options, table.ExecuteAsync_InputRequestOptions);
                     }
 
@@ -546,7 +546,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("entity", async () =>
                     {
-                        await Store().Insert<TableEntity>(entity: null);
+                        await Store().Insert<TableEntity>(entity: null!);
                     });
                 }
 
@@ -628,7 +628,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     await Store(table, tester, options).Insert(entity);
 
                     Assert.Equal(TableOperationType.Insert,
-                        table.ExecuteAsync_InputOperation.OperationType);
+                        table.ExecuteAsync_InputOperation!.OperationType);
                     Assert.Equal(entity, table.ExecuteAsync_InputOperation.Entity);
                     Assert.Equal(options, table.ExecuteAsync_InputRequestOptions);
                     Assert.Null(table.ExecuteAsync_InputOperationContext);
@@ -660,7 +660,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("entity", async () =>
                     {
-                        await Store().InsertOrReplace<TableEntity>(entity: null);
+                        await Store().InsertOrReplace<TableEntity>(entity: null!);
                     });
                 }
 
@@ -742,7 +742,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     await Store(table, tester, options).InsertOrReplace(entity);
 
                     Assert.Equal(TableOperationType.InsertOrReplace,
-                        table.ExecuteAsync_InputOperation.OperationType);
+                        table.ExecuteAsync_InputOperation!.OperationType);
                     Assert.Equal(entity, table.ExecuteAsync_InputOperation.Entity);
                     Assert.Equal(options, table.ExecuteAsync_InputRequestOptions);
                     Assert.Null(table.ExecuteAsync_InputOperationContext);
@@ -774,7 +774,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("entity", async () =>
                     {
-                        await Store().Replace<TableEntity>(entity: null);
+                        await Store().Replace<TableEntity>(entity: null!);
                     });
                 }
 
@@ -856,7 +856,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     await Store(table, tester, options).Replace(entity);
 
                     Assert.Equal(TableOperationType.Replace,
-                        table.ExecuteAsync_InputOperation.OperationType);
+                        table.ExecuteAsync_InputOperation!.OperationType);
                     Assert.Equal(entity, table.ExecuteAsync_InputOperation.Entity);
                     Assert.Equal(options, table.ExecuteAsync_InputRequestOptions);
                     Assert.Null(table.ExecuteAsync_InputOperationContext);
@@ -888,7 +888,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("entity", async () =>
                     {
-                        await Store().Merge<TableEntity>(entity: null);
+                        await Store().Merge<TableEntity>(entity: null!);
                     });
                 }
 
@@ -970,7 +970,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     await Store(table, tester, options).Merge(entity);
 
                     Assert.Equal(TableOperationType.Merge,
-                        table.ExecuteAsync_InputOperation.OperationType);
+                        table.ExecuteAsync_InputOperation!.OperationType);
                     Assert.Equal(entity, table.ExecuteAsync_InputOperation.Entity);
                     Assert.Equal(options, table.ExecuteAsync_InputRequestOptions);
                     Assert.Null(table.ExecuteAsync_InputOperationContext);
@@ -1002,7 +1002,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("entity", async () =>
                     {
-                        await Store().Delete<TableEntity>(entity: null);
+                        await Store().Delete<TableEntity>(entity: null!);
                     });
                 }
 
@@ -1084,7 +1084,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
                     await Store(table, tester, options).Delete(entity);
 
                     Assert.Equal(TableOperationType.Delete,
-                        table.ExecuteAsync_InputOperation.OperationType);
+                        table.ExecuteAsync_InputOperation!.OperationType);
                     Assert.Equal(entity, table.ExecuteAsync_InputOperation.Entity);
                     Assert.Equal(options, table.ExecuteAsync_InputRequestOptions);
                     Assert.Null(table.ExecuteAsync_InputOperationContext);
@@ -1110,8 +1110,8 @@ namespace ThoughtHaven.Azure.Storage.Test.Table
         private static FakeCloudTable Table() => new FakeCloudTable("table");
         private static FakeTableExistenceTester Tester() => new FakeTableExistenceTester();
         private static TableRequestOptions Options() => new TableRequestOptions();
-        private static TableEntityStore Store(FakeCloudTable table = null,
-            FakeTableExistenceTester tester = null, TableRequestOptions options = null) =>
+        private static TableEntityStore Store(FakeCloudTable? table = null,
+            FakeTableExistenceTester? tester = null, TableRequestOptions? options = null) =>
             new TableEntityStore(table ?? Table(), tester ?? Tester(), options ?? Options());
         private static TableEntity Entity() => new TableEntity()
         {

@@ -6,14 +6,14 @@ namespace Microsoft.WindowsAzure.Storage.Table
     {
         public static bool IsSuccessStatusCode(this TableResult result)
         {
-            if (result == null) { throw new ArgumentNullException(nameof(result)); }
+            if (result is null) { throw new ArgumentNullException(nameof(result)); }
 
             return result.HttpStatusCode >= 200 && result.HttpStatusCode < 300;
         }
 
         public static void EnsureSuccessStatusCode(this TableResult result)
         {
-            if (result == null) { throw new ArgumentNullException(nameof(result)); }
+            if (result is null) { throw new ArgumentNullException(nameof(result)); }
 
             if (!result.IsSuccessStatusCode())
             {

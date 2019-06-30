@@ -16,7 +16,8 @@ namespace ThoughtHaven.Azure.Storage.Test
                 {
                     await Assert.ThrowsAsync<ArgumentNullException>("resource", async () =>
                     {
-                        await Tester(nameof(NullResource_Throws)).EnsureExists(resource: null);
+                        await Tester(nameof(NullResource_Throws))
+                            .EnsureExists(resource: null!);
                     });
                 }
 

@@ -15,7 +15,7 @@ namespace ThoughtHaven.Azure.Storage.Tests.Fakes
             this.TestStorageUri = testStorageUri;
         }
 
-        public object CreateIfNotExists_InputResource;
+        public object? CreateIfNotExists_InputResource;
         protected override Task CreateIfNotExists(object resource)
         {
             this.CreateIfNotExists_InputResource = resource;
@@ -23,7 +23,7 @@ namespace ThoughtHaven.Azure.Storage.Tests.Fakes
             return Task.CompletedTask;
         }
 
-        public object GetStorageUri_InputResource;
+        public object? GetStorageUri_InputResource;
         protected override StorageUri GetStorageUri(object resource)
         {
             this.GetStorageUri_InputResource = resource;

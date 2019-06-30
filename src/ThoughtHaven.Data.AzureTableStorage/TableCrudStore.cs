@@ -23,7 +23,7 @@ namespace ThoughtHaven.Data
             this.DataToEntityKeys = Guard.Null(nameof(dataToEntityKeys), dataToEntityKeys);
         }
 
-        public virtual async Task<TData> Retrieve(TKey key)
+        public virtual async Task<TData?> Retrieve(TKey key)
         {
             Guard.Null(nameof(key), key);
 

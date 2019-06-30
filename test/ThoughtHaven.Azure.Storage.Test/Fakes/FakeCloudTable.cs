@@ -14,14 +14,14 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             base(tableAddress: new Uri($"https://example.com/{tableName}"))
         { }
 
-        public TableQuery<DynamicTableEntity> ExecuteQuerySegmentedAsync_InputQuery;
-        public TableContinuationToken ExecuteQuerySegmentedAsync_InputToken;
-        public TableRequestOptions ExecuteQuerySegmentedAsync_InputRequestOptions;
-        public OperationContext ExecuteQuerySegmentedAsync_InputOperationContext;
+        public TableQuery<DynamicTableEntity>? ExecuteQuerySegmentedAsync_InputQuery;
+        public TableContinuationToken? ExecuteQuerySegmentedAsync_InputToken;
+        public TableRequestOptions? ExecuteQuerySegmentedAsync_InputRequestOptions;
+        public OperationContext? ExecuteQuerySegmentedAsync_InputOperationContext;
         private bool ExecuteQuerySegmentedAsync_OutputTokenSet = false;
-        public TableContinuationToken ExecuteQuerySegmentedAsync_OutputToken = null;
+        public TableContinuationToken? ExecuteQuerySegmentedAsync_OutputToken = null;
         public List<DynamicTableEntity> ExecuteQuerySegmentedAsync_OutputEntities = new List<DynamicTableEntity>();
-        public List<DynamicTableEntity> ExecuteQuerySegmentedAsync_OutputContinuationEntities;
+        public List<DynamicTableEntity>? ExecuteQuerySegmentedAsync_OutputContinuationEntities;
         public TableQuerySegment<DynamicTableEntity> ExecuteQuerySegmentedAsync_Output
         {
             get
@@ -34,8 +34,8 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
                     ? this.ExecuteQuerySegmentedAsync_OutputEntities
                     : this.ExecuteQuerySegmentedAsync_OutputContinuationEntities;
 
-                var segment = ctor.Invoke(new object[] { entities })
-                    as TableQuerySegment<DynamicTableEntity>;
+                var segment = (TableQuerySegment<DynamicTableEntity>)ctor.Invoke(
+                    new object[] { entities! });
 
                 if (this.ExecuteQuerySegmentedAsync_OutputToken != null &&
                     !this.ExecuteQuerySegmentedAsync_OutputTokenSet)
@@ -60,12 +60,12 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             this.ExecuteQuerySegmentedAsync_InputRequestOptions = requestOptions;
             this.ExecuteQuerySegmentedAsync_InputOperationContext = operationContext;
 
-            return Task.FromResult(
-                this.ExecuteQuerySegmentedAsync_Output as TableQuerySegment<T>);
+            return Task.FromResult<TableQuerySegment<T>>(
+                (this.ExecuteQuerySegmentedAsync_Output as TableQuerySegment<T>)!);
         }
 
-        public TableRequestOptions CreateAsync_InputRequestOptions;
-        public OperationContext CreateAsync_InputOperationContext;
+        public TableRequestOptions? CreateAsync_InputRequestOptions;
+        public OperationContext? CreateAsync_InputOperationContext;
         public override Task CreateAsync(TableRequestOptions requestOptions,
             OperationContext operationContext)
         {
@@ -75,8 +75,8 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return Task.CompletedTask;
         }
 
-        public TableRequestOptions CreateIfNotExistsAsync_InputRequestOptions;
-        public OperationContext CreateIfNotExistsAsync_InputOperationContext;
+        public TableRequestOptions? CreateIfNotExistsAsync_InputRequestOptions;
+        public OperationContext? CreateIfNotExistsAsync_InputOperationContext;
         public bool CreateIfNotExistsAsync_Output = true;
         public override Task<bool> CreateIfNotExistsAsync(TableRequestOptions requestOptions,
             OperationContext operationContext)
@@ -87,8 +87,8 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return Task.FromResult(this.CreateIfNotExistsAsync_Output);
         }
 
-        public TableRequestOptions DeleteAsync_InputRequestOptions;
-        public OperationContext DeleteAsync_InputOperationContext;
+        public TableRequestOptions? DeleteAsync_InputRequestOptions;
+        public OperationContext? DeleteAsync_InputOperationContext;
         public override Task DeleteAsync(TableRequestOptions requestOptions,
             OperationContext operationContext)
         {
@@ -98,8 +98,8 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return Task.CompletedTask;
         }
 
-        public TableRequestOptions DeleteIfExistsAsync_InputRequestOptions;
-        public OperationContext DeleteIfExistsAsync_InputOperationContext;
+        public TableRequestOptions? DeleteIfExistsAsync_InputRequestOptions;
+        public OperationContext? DeleteIfExistsAsync_InputOperationContext;
         public bool DeleteIfExistsAsync_Output = true;
         public override Task<bool> DeleteIfExistsAsync(TableRequestOptions requestOptions,
             OperationContext operationContext)
@@ -110,9 +110,9 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return Task.FromResult(this.DeleteIfExistsAsync_Output);
         }
 
-        public TableOperation ExecuteAsync_InputOperation;
-        public TableRequestOptions ExecuteAsync_InputRequestOptions;
-        public OperationContext ExecuteAsync_InputOperationContext;
+        public TableOperation? ExecuteAsync_InputOperation;
+        public TableRequestOptions? ExecuteAsync_InputRequestOptions;
+        public OperationContext? ExecuteAsync_InputOperationContext;
         public TableResult ExecuteAsync_Output = new TableResult() { HttpStatusCode = 200 };
         public override Task<TableResult> ExecuteAsync(TableOperation operation,
             TableRequestOptions requestOptions, OperationContext operationContext)
@@ -124,9 +124,9 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             return Task.FromResult(this.ExecuteAsync_Output);
         }
 
-        public TableBatchOperation ExecuteBatchAsync_InputBatch;
-        public TableRequestOptions ExecuteBatchAsync_InputRequestOptions;
-        public OperationContext ExecuteBatchAsync_InputOperationContext;
+        public TableBatchOperation? ExecuteBatchAsync_InputBatch;
+        public TableRequestOptions? ExecuteBatchAsync_InputRequestOptions;
+        public OperationContext? ExecuteBatchAsync_InputOperationContext;
         public IList<TableResult> ExecuteBatchAsync_Output = new List<TableResult>()
         { new TableResult() { HttpStatusCode = 200 } };
         public override Task<IList<TableResult>> ExecuteBatchAsync(TableBatchOperation batch,

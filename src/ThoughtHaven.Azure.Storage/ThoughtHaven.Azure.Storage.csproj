@@ -1,18 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.105.2</Version>
+    <Version>0.106.0</Version>
     <Authors>Thought Haven, Brendan Ridenour</Authors>
     <Product>Thought Haven Azure Storage</Product>
     <Description>Convenient helpers and wrappers for the Microsoft Azure storage library.</Description>
     <Copyright>© Thought Haven. All rights reserved.</Copyright>
     <Company>Thought Haven</Company>
+    <LangVersion>8.0</LangVersion>
+    <!--<Nullable>enable</Nullable>-->
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ThoughtHaven.Guards" Version="0.101.1" />
+    <PackageReference Include="ThoughtHaven.Guards" Version="0.102.0" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 
