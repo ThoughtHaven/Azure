@@ -41,7 +41,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
                     !this.ExecuteQuerySegmentedAsync_OutputTokenSet)
                 {
                     var token = segment.GetType().GetField("continuationToken",
-                        BindingFlags.Instance | BindingFlags.NonPublic);
+                        BindingFlags.Instance | BindingFlags.NonPublic)!;
 
                     token.SetValue(segment, this.ExecuteQuerySegmentedAsync_OutputToken);
 

@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <RootNamespace>ThoughtHaven.Data</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.107.0</Version>
+    <Version>0.200.0</Version>
     <Authors>Thought Haven, Brendan Ridenour</Authors>
     <Company>Thought Haven</Company>
     <Product>Thought Haven Data Azure Table Storage</Product>
@@ -12,6 +12,7 @@
     <Copyright>© Thought Haven. All rights reserved.</Copyright>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604;CS8618;CS8625</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
