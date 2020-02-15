@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.500.0</Version>
+    <Version>0.600.0</Version>
     <Authors>Thought Haven, Brendan Ridenour</Authors>
     <Product>Thought Haven Azure Storage</Product>
     <Description>Convenient helpers and wrappers for the Microsoft Azure storage library.</Description>
@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ThoughtHaven.Guards" Version="0.500.0" />
+    <PackageReference Include="ThoughtHaven.Guards" Version="0.600.0" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 
