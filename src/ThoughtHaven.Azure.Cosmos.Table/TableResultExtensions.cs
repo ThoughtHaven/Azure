@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Microsoft.WindowsAzure.Storage.Table
+namespace Microsoft.Azure.Cosmos.Table
 {
     public static class TableResultExtensions
     {

@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
-using ThoughtHaven.Azure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 
-namespace ThoughtHaven.Azure.Storage.Test.Fakes
+namespace ThoughtHaven.Azure.Cosmos.Table.Fakes
 {
     public class FakeTableExistenceTester : TableExistenceTester
     {

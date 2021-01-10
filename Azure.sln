@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0C7019A2-8F2E-486E-9A17-886706AD33CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D6BEC558-F433-4EC8-8415-6F893F94D62D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThoughtHaven.Azure.Storage", "src\ThoughtHaven.Azure.Storage\ThoughtHaven.Azure.Storage.csproj", "{5786AD4D-C488-42C5-9935-1101C5451371}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Azure.Cosmos.Table", "src\ThoughtHaven.Azure.Cosmos.Table\ThoughtHaven.Azure.Cosmos.Table.csproj", "{3D175DD3-A846-4A38-A487-A6544FC6883C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThoughtHaven.Azure.Storage.Test", "test\ThoughtHaven.Azure.Storage.Test\ThoughtHaven.Azure.Storage.Test.csproj", "{556B898B-7DD5-46E8-A4FB-35F57AE5D453}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Azure.Cosmos.Table.Test", "test\ThoughtHaven.Azure.Cosmos.Table.Test\ThoughtHaven.Azure.Cosmos.Table.Test.csproj", "{F3F298A0-8DF1-42CC-8519-D7CB3ED5916E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.AzureTableStorage", "src\ThoughtHaven.Data.AzureTableStorage\ThoughtHaven.Data.AzureTableStorage.csproj", "{1B05BA0B-64E1-4491-A422-05B65131FE32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.AzureCosmosTable", "src\ThoughtHaven.Data.AzureCosmosTable\ThoughtHaven.Data.AzureCosmosTable.csproj", "{4F530F8F-80C2-43AD-ACBA-DF6B28B87365}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.AzureTableStorage.Test", "test\ThoughtHaven.Data.AzureTableStorage.Test\ThoughtHaven.Data.AzureTableStorage.Test.csproj", "{56C519E1-8374-44A3-8FA8-DE5B33A77768}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtHaven.Data.AzureCosmosTable.Test", "test\ThoughtHaven.Data.AzureCosmosTable.Test\ThoughtHaven.Data.AzureCosmosTable.Test.csproj", "{D87C4660-E2A3-439E-9E5F-3D7BBC4A5E1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,31 +21,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5786AD4D-C488-42C5-9935-1101C5451371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5786AD4D-C488-42C5-9935-1101C5451371}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5786AD4D-C488-42C5-9935-1101C5451371}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5786AD4D-C488-42C5-9935-1101C5451371}.Release|Any CPU.Build.0 = Release|Any CPU
-		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{556B898B-7DD5-46E8-A4FB-35F57AE5D453}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B05BA0B-64E1-4491-A422-05B65131FE32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56C519E1-8374-44A3-8FA8-DE5B33A77768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D175DD3-A846-4A38-A487-A6544FC6883C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D175DD3-A846-4A38-A487-A6544FC6883C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D175DD3-A846-4A38-A487-A6544FC6883C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D175DD3-A846-4A38-A487-A6544FC6883C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F298A0-8DF1-42CC-8519-D7CB3ED5916E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F298A0-8DF1-42CC-8519-D7CB3ED5916E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F298A0-8DF1-42CC-8519-D7CB3ED5916E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F298A0-8DF1-42CC-8519-D7CB3ED5916E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F530F8F-80C2-43AD-ACBA-DF6B28B87365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F530F8F-80C2-43AD-ACBA-DF6B28B87365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F530F8F-80C2-43AD-ACBA-DF6B28B87365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F530F8F-80C2-43AD-ACBA-DF6B28B87365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87C4660-E2A3-439E-9E5F-3D7BBC4A5E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87C4660-E2A3-439E-9E5F-3D7BBC4A5E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87C4660-E2A3-439E-9E5F-3D7BBC4A5E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87C4660-E2A3-439E-9E5F-3D7BBC4A5E1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5786AD4D-C488-42C5-9935-1101C5451371} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
-		{556B898B-7DD5-46E8-A4FB-35F57AE5D453} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
-		{1B05BA0B-64E1-4491-A422-05B65131FE32} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
-		{56C519E1-8374-44A3-8FA8-DE5B33A77768} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
+		{3D175DD3-A846-4A38-A487-A6544FC6883C} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
+		{F3F298A0-8DF1-42CC-8519-D7CB3ED5916E} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
+		{4F530F8F-80C2-43AD-ACBA-DF6B28B87365} = {0C7019A2-8F2E-486E-9A17-886706AD33CD}
+		{D87C4660-E2A3-439E-9E5F-3D7BBC4A5E1C} = {D6BEC558-F433-4EC8-8415-6F893F94D62D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CB6E9F6-3A2C-4CA5-9843-738ACCB1D1DA}

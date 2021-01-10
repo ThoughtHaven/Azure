@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage.Table;
-using ThoughtHaven.Azure.Storage.Table;
-using ThoughtHaven.Azure.Storage.Test.Fakes;
+using Microsoft.Azure.Cosmos.Table;
+using ThoughtHaven.Azure.Cosmos.Table.Fakes;
 using Xunit;
 
-namespace ThoughtHaven.Azure.Storage.Test.Table
+namespace ThoughtHaven.Azure.Cosmos.Table
 {
     public class TableEntityStoreTests
     {

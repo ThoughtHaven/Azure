@@ -1,9 +1,9 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.Azure.Cosmos.Table;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ThoughtHaven.Azure.Storage.Table
+namespace ThoughtHaven.Azure.Cosmos.Table
 {
     public class TableEntityStore
     {
@@ -55,7 +55,7 @@ namespace ThoughtHaven.Azure.Storage.Table
                 var segment = await this.Table.ExecuteQuerySegmentedAsync(query, token,
                     this.Options, operationContext: null).ConfigureAwait(false);
 
-                results.AddRange(segment?.Results ?? (IEnumerable<TEntity>)new TEntity[0]);
+                results.AddRange(segment?.Results ?? (IEnumerable<TEntity>)Array.Empty<TEntity>());
 
                 if (take.HasValue && results.Count >= take)
                 {

@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 using Xunit;
 
-namespace ThoughtHaven.Azure.Storage.Table
+namespace ThoughtHaven.Azure.Cosmos.Table
 {
     public class TableResultExtensionsTests
     {

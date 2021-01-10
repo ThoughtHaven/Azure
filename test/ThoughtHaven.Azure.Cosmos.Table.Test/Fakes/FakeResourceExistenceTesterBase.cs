@@ -1,9 +1,9 @@
-﻿using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.Azure.Cosmos.Table;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ThoughtHaven.Azure.Storage.Tests.Fakes
+namespace ThoughtHaven.Azure.Cosmos.Table.Fakes
 {
     public class FakeResourceExistenceTesterBase : ResourceExistenceTesterBase<object>
     {

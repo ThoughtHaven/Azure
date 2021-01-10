@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ThoughtHaven.Azure.Storage.Test.Fakes;
+using ThoughtHaven.Azure.Cosmos.Table.Fakes;
 using Xunit;
 
-namespace ThoughtHaven.Azure.Storage.Test.Table
+namespace ThoughtHaven.Azure.Cosmos.Table
 {
     public class TableExistenceTesterTests
     {

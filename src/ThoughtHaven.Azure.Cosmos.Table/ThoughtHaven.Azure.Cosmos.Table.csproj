@@ -1,22 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.700.0</Version>
+    <TargetFramework>net5.0</TargetFramework>
     <Authors>Thought Haven, Brendan Ridenour</Authors>
     <Product>Thought Haven Azure Storage</Product>
     <Description>Convenient helpers and wrappers for the Microsoft Azure storage library.</Description>
     <Copyright>© Thought Haven. All rights reserved.</Copyright>
     <Company>Thought Haven</Company>
-    <LangVersion>8.0</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1000.0</Version>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604;CS8618;CS8625</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ThoughtHaven.Guards" Version="0.700.0" />
-    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="2.0.0-preview" />
+    <PackageReference Include="ThoughtHaven.Guards" Version="0.1000.0" />
   </ItemGroup>
 
 </Project>

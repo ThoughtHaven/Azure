@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 
-namespace ThoughtHaven.Azure.Storage.Table
+namespace ThoughtHaven.Azure.Cosmos.Table
 {
     public class TableExistenceTester : ResourceExistenceTesterBase<CloudTable>
     {

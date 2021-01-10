@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 
-namespace ThoughtHaven.Azure.Storage.Test.Fakes
+namespace ThoughtHaven.Azure.Cosmos.Table.Fakes
 {
     public class FakeCloudTable : CloudTable
     {
@@ -28,13 +27,13 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             {
                 var ctor = typeof(TableQuerySegment<DynamicTableEntity>)
                     .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
-                    .FirstOrDefault(c => c.GetParameters().Count() == 1);
+                    .FirstOrDefault(c => c.GetParameters().Length == 1);
 
                 var entities = !this.ExecuteQuerySegmentedAsync_OutputTokenSet
                     ? this.ExecuteQuerySegmentedAsync_OutputEntities
                     : this.ExecuteQuerySegmentedAsync_OutputContinuationEntities;
 
-                var segment = (TableQuerySegment<DynamicTableEntity>)ctor.Invoke(
+                var segment = (TableQuerySegment<DynamicTableEntity>)ctor!.Invoke(
                     new object[] { entities! });
 
                 if (this.ExecuteQuerySegmentedAsync_OutputToken != null &&
@@ -60,7 +59,7 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
             this.ExecuteQuerySegmentedAsync_InputRequestOptions = requestOptions;
             this.ExecuteQuerySegmentedAsync_InputOperationContext = operationContext;
 
-            return Task.FromResult<TableQuerySegment<T>>(
+            return Task.FromResult(
                 (this.ExecuteQuerySegmentedAsync_Output as TableQuerySegment<T>)!);
         }
 
@@ -127,15 +126,14 @@ namespace ThoughtHaven.Azure.Storage.Test.Fakes
         public TableBatchOperation? ExecuteBatchAsync_InputBatch;
         public TableRequestOptions? ExecuteBatchAsync_InputRequestOptions;
         public OperationContext? ExecuteBatchAsync_InputOperationContext;
-        public IList<TableResult> ExecuteBatchAsync_Output = new List<TableResult>()
+        public TableBatchResult ExecuteBatchAsync_Output = new TableBatchResult()
         { new TableResult() { HttpStatusCode = 200 } };
-        public override Task<IList<TableResult>> ExecuteBatchAsync(TableBatchOperation batch,
+        public override Task<TableBatchResult> ExecuteBatchAsync(TableBatchOperation batch,
             TableRequestOptions requestOptions, OperationContext operationContext)
         {
             this.ExecuteBatchAsync_InputBatch = batch;
             this.ExecuteBatchAsync_InputRequestOptions = requestOptions;
             this.ExecuteBatchAsync_InputOperationContext = operationContext;
-
 
             return Task.FromResult(this.ExecuteBatchAsync_Output);
         }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
+using Microsoft.Azure.Cosmos.Table;
 
-namespace ThoughtHaven.Azure.Storage
+namespace ThoughtHaven.Azure.Cosmos.Table
 {
     public abstract class ResourceExistenceTesterBase<TResource>
     {
